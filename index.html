@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpongeBob Action Verbs - Termo Challenge</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+    <div id="page-instructions" class="app-page active">
+        <header>
+            <h1>Bem-vindo ao Desafio de Ação! 🦀</h1>
+            <h2>Aprenda Verbos com Bob Esponja.</h2>
+        </header>
+        <section class="instructions-content">
+            <h3>Como Jogar:</h3>
+            <p>1. <strong>Aprenda:</strong> Você começará no modo <strong>Memorização</strong> (Carousel) para ver a imagem e ouvir o som de 7 verbos de ação.</p>
+            <p>2. <strong>Pratique:</strong> Você será levado ao <strong>Crossword Game</strong>.</p>
+            <p>3. <strong>Verifique:</strong> Digite as letras e use o botão "CHECK" para ver o feedback de cores no estilo <strong>Termo</strong>:</p>
+            <ul>
+                <li><span class="color-indicator green-bg">🟢</span> <strong>Verde (Green):</strong> Letra correta e na posição correta.</li>
+                <li><span class="color-indicator yellow-bg">🟡</span> <strong>Amarelo (Yellow):</strong> Letra existe na palavra, mas está na posição errada.</li>
+                <li><span class="color-indicator gray-bg">⚫</span> <strong>Cinza (Gray):</strong> A letra não existe na palavra.</li>
+            </ul>
+            <p>Seja rápido e preciso! Boa sorte!</p>
+        </section>
+        <button id="start-learning-button" class="btn-primary">INICIAR MEMORIZAÇÃO</button>
+    </div>
+
+    <div id="page-carousel" class="app-page">
+        <h2>Fase de Memorização: Atenção aos Nomes e Sons! 🎧</h2>
+        <div id="carousel-container">
+            </div>
+        <p id="carousel-message">Preste atenção nos nomes e sons! Próximo slide em <span id="carousel-timer">3</span>s...</p>
+        <button id="start-game-button" class="btn-primary" disabled>INICIAR JOGO</button>
+    </div>
+
+    <div id="page-game" class="app-page">
+        <header class="game-header">
+            <h2>Desafio de Verbos</h2>
+        </header>
+        
+        <main class="game-layout-3-col">
+            <section id="crossword-column">
+                <div id="crossword-grid">
+                    </div>
+                <div id="game-controls">
+                    <button id="check-letters-button" class="btn-primary">VERIFICAR LETRAS</button>
+                    <p id="game-message"></p>
+                </div>
+            </section>
+
+            <section id="image-hint-column">
+                <div id="image-hint-box">
+                    <img id="spongebob-action-image" src="images/default.png" alt="SpongeBob Action Hint" class="action-image">
+                    <p id="hint-text">Clique em uma dica para ver a imagem!</p>
+                </div>
+            </section>
+
+            <section id="word-hint-column">
+                <h4>Dicas de Palavras:</h4>
+                <div id="clues">
+                    </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Reward Banner -->
+    <div id="reward-banner" class="reward-banner hidden">
+        <div class="reward-content">
+            <div class="reward-image-container">
+                <img id="reward-image" src="" alt="SpongeBob Action" class="reward-image">
+            </div>
+            <div class="reward-text">
+                <h2 id="reward-title">🎉 Parabéns! 🎉</h2>
+                <p id="reward-message">Você acertou a palavra!</p>
+                <button id="close-reward" class="btn-primary">Continuar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

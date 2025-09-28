@@ -1,0 +1,625 @@
+/* GERAL E RESET */
+body {
+    font-family: 'Inter', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #2d3748;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+header h1 {
+    background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+    text-shadow: none;
+    letter-spacing: -0.02em;
+}
+
+h2, h3, h4 {
+    color: #2d3748;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+h2 {
+    font-size: 2rem;
+    margin: 0 0 1rem 0;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin: 0 0 0.75rem 0;
+}
+
+h4 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem 0;
+}
+
+/* NAVEGAÇÃO ENTRE PÁGINAS */
+.app-page {
+    display: none;
+    padding: 2rem;
+    max-width: 100%;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Página de instruções mantém padding normal */
+#page-instructions {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Página do carousel mantém padding normal */
+#page-carousel {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Página do jogo usa largura total */
+#page-game {
+    padding: 0;
+    max-width: 100%;
+    margin: 0;
+    width: 100%;
+}
+
+/* Game header */
+.game-header {
+    padding: 2rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-bottom: 1px solid #e2e8f0;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.app-page.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* BOTÕES */
+.btn-primary, .btn-secondary {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.025em;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+    background: linear-gradient(135deg, #cbd5e0 0%, #a0aec0 100%);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    box-shadow: 0 10px 25px rgba(79, 172, 254, 0.4);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(79, 172, 254, 0.6);
+}
+
+/* -------------------------------------- */
+/* PAGE 1: INSTRUCTIONS */
+/* -------------------------------------- */
+.instructions-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 2.5rem;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    margin: 2rem 0;
+    text-align: left;
+    max-width: 700px;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.instructions-content strong {
+    color: #667eea;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.color-indicator {
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    margin-right: 0.5rem;
+    display: inline-block;
+    font-size: 0.875rem;
+    letter-spacing: 0.025em;
+}
+
+.green-bg { 
+    color: white; 
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+.yellow-bg { 
+    color: #1f2937; 
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    box-shadow: 0 4px 14px rgba(251, 191, 36, 0.4);
+}
+
+.gray-bg { 
+    color: white; 
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    box-shadow: 0 4px 14px rgba(107, 114, 128, 0.4);
+}
+
+
+/* -------------------------------------- */
+/* PAGE 2: CAROUSEL */
+/* -------------------------------------- */
+#carousel-container {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    height: 400px;
+    overflow: hidden;
+    margin: 2rem 0;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.carousel-slide {
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.slide-image {
+    max-width: 250px;
+    max-height: 250px;
+    margin-bottom: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.slide-image:hover {
+    transform: scale(1.05);
+}
+
+.slide-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #2d3748;
+    letter-spacing: -0.02em;
+}
+
+/* -------------------------------------- */
+/* PAGE 3: CROSSWORD GAME (3-COLUMN LAYOUT) */
+/* -------------------------------------- */
+.game-layout-3-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Três colunas iguais */
+    gap: 20px;
+    width: 100vw; /* Usa largura total da viewport */
+    max-width: 100vw;
+    height: calc(100vh - 120px); /* Usa altura total da tela menos espaço para header */
+    margin: 20px 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Estilo dos containers de coluna */
+#crossword-column, #image-hint-column, #word-hint-column {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 2rem;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#crossword-column:hover, #image-hint-column:hover, #word-hint-column:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.35);
+}
+
+/* A GRELHA (7x7) */
+#crossword-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 colunas que se expandem */
+    grid-template-rows: repeat(7, 1fr); /* 7 linhas que se expandem */
+    margin: 2rem auto;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    flex: 1; /* Expande para preencher o espaço disponível */
+    min-height: 0; /* Permite que o grid se contraia se necessário */
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cell {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    position: relative;
+    font-size: 0.8em; 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 30px; /* Altura mínima para garantir legibilidade */
+    border-radius: 8px;
+    margin: 1px;
+}
+
+/* Cores diferentes para cada palavra */
+.cell[data-word="0"] { 
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe); 
+    border-color: #3b82f6;
+} /* Azul claro - SWIM */
+.cell[data-word="1"] { 
+    background: linear-gradient(135deg, #f3e8ff, #e9d5ff); 
+    border-color: #8b5cf6;
+} /* Roxo claro - DIVE */
+.cell[data-word="2"] { 
+    background: linear-gradient(135deg, #dcfce7, #bbf7d0); 
+    border-color: #10b981;
+} /* Verde claro - EAT */
+.cell[data-word="3"] { 
+    background: linear-gradient(135deg, #fed7aa, #fdba74); 
+    border-color: #f59e0b;
+} /* Laranja claro - CATCH */
+.cell[data-word="4"] { 
+    background: linear-gradient(135deg, #fce7f3, #fbcfe8); 
+    border-color: #ec4899;
+} /* Rosa claro - CHASE */
+.cell[data-word="5"] { 
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7); 
+    border-color: #22c55e;
+} /* Verde lima - DIG */
+.cell[data-word="6"] { 
+    background: linear-gradient(135deg, #ecfeff, #cffafe); 
+    border-color: #06b6d4;
+} /* Verde água - DRIFT */
+
+/* Células não utilizadas (pretas) */
+.cell.unused { 
+    background: linear-gradient(135deg, #1f2937, #111827) !important; 
+    color: white; 
+    border-color: #374151;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Números das linhas */
+.row-number {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 0.7em;
+    font-weight: bold;
+    color: #003366;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 3px;
+    padding: 1px 3px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.cell input {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    box-sizing: border-box;
+    background: none;
+    color: #2d3748;
+    z-index: 1;
+    position: relative;
+    text-shadow: none;
+    font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+    letter-spacing: 0.05em;
+}
+
+/* CORES DO FEEDBACK TERMO */
+/* Usamos !important para garantir a prioridade sobre o background: transparent do input */
+.cell.correct { 
+    background: linear-gradient(135deg, #10b981, #059669) !important; 
+    color: white; 
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    transform: scale(1.05);
+} /* 🟢 GREEN */
+.cell.present { 
+    background: linear-gradient(135deg, #fbbf24, #f59e0b) !important; 
+    color: #1f2937; 
+    box-shadow: 0 4px 14px rgba(251, 191, 36, 0.4);
+    transform: scale(1.05);
+} /* 🟡 YELLOW */
+.cell.absent { 
+    background: linear-gradient(135deg, #6b7280, #4b5563) !important; 
+    color: white; 
+    box-shadow: 0 4px 14px rgba(107, 114, 128, 0.4);
+} /* ⚫ GRAY */
+
+/* Efeito de destaque para letra resolvida */
+.cell.correct input {
+    color: white !important;
+    font-weight: bold;
+    text-shadow: 0 1px 2px #222;
+    transform: scale(1.1);
+    transition: transform 0.3s;
+    }
+
+    .cell.present input {
+        background-color: #FFC107 !important;
+        color: #333 !important;
+        font-weight: bold;
+        text-shadow: 0 1px 2px #fff;
+    }
+
+    .cell.absent input {
+        background-color: #6c757d !important;
+        color: white !important;
+        font-weight: bold;
+        text-shadow: 0 1px 2px #222;
+}
+
+/* Estilo da célula em foco */
+.cell input:focus {
+    box-shadow: 0 0 0 2px #007bff;
+    z-index: 1;
+}
+
+/* Game Controls */
+#game-controls {
+    margin-top: auto; /* Empurra para o final da coluna */
+    padding-top: 15px;
+}
+
+/* IMAGE HINT COLUMN */
+#image-hint-box {
+    padding: 20px;
+    border: 2px solid #ffc300;
+    border-radius: 10px;
+    margin-top: 0; /* Remove margin since no heading above */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#spongebob-action-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+}
+
+#hint-text {
+    display: none; /* Esconde o texto abaixo da imagem */
+}
+
+/* WORD HINTS COLUMN */
+#clues {
+    margin-top: 15px;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.clue-item {
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    border-left: 5px solid transparent;
+}
+
+.clue-item:hover {
+    background-color: #e6f7ff;
+}
+
+.clue-item.active {
+    background-color: #cceeff;
+    border-left: 5px solid #007bff;
+    font-weight: bold;
+}
+
+/* REWARD BANNER */
+.reward-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.reward-banner.hidden {
+    display: none;
+}
+
+.reward-content {
+    background: linear-gradient(135deg, #ffc300, #ff8c00);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
+    animation: slideIn 0.6s ease-out;
+}
+
+.reward-image-container {
+    margin-bottom: 20px;
+}
+
+.reward-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    animation: bounceIn 0.8s ease-out;
+}
+
+.reward-text h2 {
+    color: #003366;
+    margin: 0 0 10px 0;
+    font-size: 2.2em;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.reward-text p {
+    color: #003366;
+    font-size: 1.3em;
+    margin: 0 0 20px 0;
+    font-weight: bold;
+}
+
+/* ANIMAÇÕES */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { 
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from { 
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0% { 
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    50% { 
+        transform: scale(1.1);
+    }
+    100% { 
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        transform: scale(1);
+    }
+    50% { 
+        transform: scale(1.05);
+    }
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 900px) {
+    .game-layout-3-col {
+        grid-template-columns: 1fr; /* Empilha as colunas em telas menores */
+    }
+    
+    .reward-content {
+        padding: 20px;
+        max-width: 350px;
+    }
+    
+    .reward-image {
+        max-width: 150px;
+        max-height: 150px;
+    }
+}

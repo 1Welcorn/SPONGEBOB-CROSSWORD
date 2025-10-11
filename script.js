@@ -293,7 +293,14 @@ function checkLetters() {
             inputs.forEach(input => {
                 input.value = '';
                 const cell = input.parentNode;
+                // Remove todas as classes de feedback e força o reset visual
                 cell.classList.remove('correct', 'present', 'absent');
+                // Força o reset do estilo inline se existir
+                cell.style.background = '';
+                cell.style.color = '';
+                cell.style.transform = '';
+                cell.style.boxShadow = '';
+                cell.style.borderColor = '';
             });
             return; // Sai da iteração para esta palavra
         }
@@ -312,13 +319,20 @@ function checkLetters() {
             const correctLetter = word[colIndex];
             const cell = input.parentNode;
 
-            // Remove classes anteriores
+            // Remove classes anteriores e força reset visual
             cell.classList.remove('correct', 'present', 'absent');
+            cell.style.background = '';
+            cell.style.color = '';
+            cell.style.transform = '';
+            cell.style.boxShadow = '';
+            cell.style.borderColor = '';
 
             if (guessLetter === correctLetter && guessLetter !== '') {
                 feedback[colIndex] = 'correct';
                 wordFreq[correctLetter]--;
                 correctGuesses++;
+                // Aplica a classe 'correct' imediatamente
+                cell.classList.add('correct');
             }
         });
 
@@ -331,6 +345,7 @@ function checkLetters() {
 
             if (guessLetter === '') {
                 // Não marca células vazias com cores Termo, mantém o fundo padrão (branco)
+                feedback[colIndex] = null;
             } else if (wordFreq[guessLetter] > 0) {
                 feedback[colIndex] = 'present';
                 wordFreq[guessLetter]--;
@@ -339,8 +354,8 @@ function checkLetters() {
             }
 
             // Aplica a classe Termo (se não for nulo/vazio)
-            if (feedback[colIndex]) {
-                 cell.classList.add(feedback[colIndex]);
+            if (feedback[colIndex] !== null && feedback[colIndex] !== undefined) {
+                cell.classList.add(feedback[colIndex]);
             }
         });
 
@@ -470,6 +485,7 @@ function hideRewardBanner() {
     const banner = document.getElementById('reward-banner');
     banner.classList.add('hidden');
 }
+
 
 // =================================================================
 // 8. INICIALIZAÇÃO

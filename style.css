@@ -203,8 +203,8 @@ h4 {
 #carousel-container {
     display: flex;
     width: 100%;
-    max-width: 900px;
-    height: 400px;
+    max-width: 1200px;
+    height: 600px;
     overflow: hidden;
     margin: 2rem 0;
     border-radius: 24px;
@@ -227,11 +227,11 @@ h4 {
 }
 
 .slide-image {
-    max-width: 250px;
-    max-height: 250px;
-    margin-bottom: 1.5rem;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    max-height: 400px;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
     transition: transform 0.3s ease;
 }
 
@@ -243,7 +243,7 @@ h4 {
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 800;
     color: #2d3748;
     letter-spacing: -0.02em;
@@ -390,46 +390,68 @@ h4 {
 }
 
 /* CORES DO FEEDBACK TERMO */
-/* Usamos !important para garantir a prioridade sobre o background: transparent do input */
+/* Usamos !important para garantir a prioridade sobre todos os outros backgrounds */
 .cell.correct { 
     background: linear-gradient(135deg, #10b981, #059669) !important; 
-    color: white; 
-    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
-    transform: scale(1.05);
+    color: white !important; 
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4) !important;
+    transform: scale(1.05) !important;
+    border-color: #059669 !important;
 } /* 🟢 GREEN */
+
+/* Força ainda mais especificidade para o verde */
+.cell[data-word].correct { 
+    background: linear-gradient(135deg, #10b981, #059669) !important; 
+    color: white !important; 
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4) !important;
+    transform: scale(1.05) !important;
+    border-color: #059669 !important;
+}
+
+/* Regra de máxima especificidade para garantir que o verde funcione */
+div.cell.correct[data-word] { 
+    background: linear-gradient(135deg, #10b981, #059669) !important; 
+    color: white !important; 
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4) !important;
+    transform: scale(1.05) !important;
+    border-color: #059669 !important;
+}
 .cell.present { 
     background: linear-gradient(135deg, #fbbf24, #f59e0b) !important; 
-    color: #1f2937; 
-    box-shadow: 0 4px 14px rgba(251, 191, 36, 0.4);
-    transform: scale(1.05);
+    color: #1f2937 !important; 
+    box-shadow: 0 4px 14px rgba(251, 191, 36, 0.4) !important;
+    transform: scale(1.05) !important;
+    border-color: #f59e0b !important;
 } /* 🟡 YELLOW */
 .cell.absent { 
     background: linear-gradient(135deg, #6b7280, #4b5563) !important; 
-    color: white; 
-    box-shadow: 0 4px 14px rgba(107, 114, 128, 0.4);
+    color: white !important; 
+    box-shadow: 0 4px 14px rgba(107, 114, 128, 0.4) !important;
+    border-color: #4b5563 !important;
 } /* ⚫ GRAY */
 
-/* Efeito de destaque para letra resolvida */
+/* Efeito de destaque para letra resolvida - REMOVED CONFLICTING INPUT STYLES */
 .cell.correct input {
     color: white !important;
-    font-weight: bold;
-    text-shadow: 0 1px 2px #222;
-    transform: scale(1.1);
-    transition: transform 0.3s;
-    }
+    font-weight: bold !important;
+    text-shadow: 0 1px 2px #222 !important;
+    transform: scale(1.1) !important;
+    transition: transform 0.3s !important;
+    background: transparent !important;
+}
 
-    .cell.present input {
-        background-color: #FFC107 !important;
-        color: #333 !important;
-        font-weight: bold;
-        text-shadow: 0 1px 2px #fff;
-    }
+.cell.present input {
+    color: #1f2937 !important;
+    font-weight: bold !important;
+    text-shadow: 0 1px 2px #fff !important;
+    background: transparent !important;
+}
 
-    .cell.absent input {
-        background-color: #6c757d !important;
-        color: white !important;
-        font-weight: bold;
-        text-shadow: 0 1px 2px #222;
+.cell.absent input {
+    color: white !important;
+    font-weight: bold !important;
+    text-shadow: 0 1px 2px #222 !important;
+    background: transparent !important;
 }
 
 /* Estilo da célula em foco */
@@ -621,5 +643,35 @@ h4 {
     .reward-image {
         max-width: 150px;
         max-height: 150px;
+    }
+    
+    /* Responsividade para o carousel */
+    #carousel-container {
+        max-width: 100%;
+        height: 500px;
+    }
+    
+    .slide-image {
+        max-width: 300px;
+        max-height: 300px;
+    }
+    
+    .slide-controls {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    #carousel-container {
+        height: 400px;
+    }
+    
+    .slide-image {
+        max-width: 250px;
+        max-height: 250px;
+    }
+    
+    .slide-controls {
+        font-size: 2rem;
     }
 }

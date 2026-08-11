@@ -66,6 +66,7 @@ function startCarousel() {
     document.getElementById('pause-carousel-button').style.display = 'inline-block';
     document.getElementById('restart-carousel-button').style.display = 'none';
     document.getElementById('start-game-button').disabled = true;
+    document.getElementById('carousel-message').style.display = 'block';
     document.getElementById('carousel-message').innerHTML = 'Preste atenção nos nomes e sons! Próximo slide em <span id="carousel-timer">3</span>s...';
     
     const timerElement = document.getElementById('carousel-timer');
@@ -89,7 +90,7 @@ function startCarousel() {
             }
         } else {
             if (carouselTimer) clearInterval(carouselTimer);
-            document.getElementById('carousel-message').innerHTML = "Memorização Completa! Clique em INICIAR JOGO ou VER NOVAMENTE.";
+            document.getElementById('carousel-message').style.display = 'none';
             document.getElementById('start-game-button').disabled = false;
             document.getElementById('restart-carousel-button').style.display = 'inline-block';
             document.getElementById('pause-carousel-button').style.display = 'none';

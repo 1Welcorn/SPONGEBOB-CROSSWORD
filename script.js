@@ -17,6 +17,45 @@ let carouselTimer = null;
 let completedWords = new Set(); // Rastreia palavras já completadas
 let isCarouselPaused = false;
 
+// Configuração do Sintetizador de Voz (Web Speech API)
+let availableVoices = [];
+function loadVoices() {
+    if ('speechSynthesis' in window) {
+        // Tenta pegar as vozes disponíveis no navegador, filtrando por inglês
+        availableVoices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
+    }
+}
+// Alguns navegadores carregam vozes assincronamente
+if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+    loadVoices();
+}
+
+function speakWord(word) {
+    if (!('speechSynthesis' in window)) return;
+    
+    // Cancela qualquer fala anterior para não encavalar
+    window.speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(word);
+    
+    if (availableVoices.length === 0) {
+        loadVoices();
+    }
+    
+    if (availableVoices.length > 0) {
+        // Escolhe uma voz aleatória entre as disponíveis no sistema
+        const randomVoice = availableVoices[Math.floor(Math.random() * availableVoices.length)];
+        utterance.voice = randomVoice;
+    }
+    
+    // Pequenas variações para soar menos robótico
+    utterance.pitch = Math.random() * 0.4 + 0.9; // Varia entre 0.9 e 1.3
+    utterance.rate = Math.random() * 0.2 + 0.9;  // Varia velocidade entre 0.9 e 1.1
+    
+    window.speechSynthesis.speak(utterance);
+}
+
 // =================================================================
 // 2. FUNÇÕES DE NAVEGAÇÃO
 // =================================================================
@@ -49,6 +88,14 @@ function createCarousel() {
                 <span>${data.word.toUpperCase()}</span>
             </div>
         `;
+        
+        const img = slide.querySelector('.slide-image');
+        img.addEventListener('mouseenter', () => {
+            if (isCarouselPaused) {
+                speakWord(data.word);
+            }
+        });
+
         container.appendChild(slide);
     });
 
@@ -65,8 +112,9 @@ function startCarousel() {
     document.getElementById('pause-carousel-button').textContent = 'PAUSAR';
     document.getElementById('pause-carousel-button').style.display = 'inline-block';
     document.getElementById('restart-carousel-button').style.display = 'none';
+    document.getElementById('start-game-button').style.display = 'none';
     document.getElementById('start-game-button').disabled = true;
-    document.getElementById('carousel-message').style.display = 'block';
+    document.getElementById('carousel-message').style.visibility = 'visible';
     document.getElementById('carousel-message').innerHTML = 'Preste atenção nos nomes e sons! Próximo slide em <span id="carousel-timer">3</span>s...';
     
     const timerElement = document.getElementById('carousel-timer');
@@ -80,18 +128,16 @@ function startCarousel() {
             time = 3;
             timerElement.textContent = time;
             
-            // Toca o áudio automaticamente para o slide atual
+            // Toca o áudio dinamicamente para o slide atual
             const currentSlideData = GAME_WORDS[currentSlide];
             if (currentSlideData) {
-                const audio = new Audio(`audio/${currentSlideData.sound}`);
-                audio.play().catch(error => {
-                    console.warn("Audio playback failed:", error);
-                });
+                speakWord(currentSlideData.word);
             }
         } else {
             if (carouselTimer) clearInterval(carouselTimer);
-            document.getElementById('carousel-message').style.display = 'none';
+            document.getElementById('carousel-message').style.visibility = 'hidden';
             document.getElementById('start-game-button').disabled = false;
+            document.getElementById('start-game-button').style.display = 'inline-block';
             document.getElementById('restart-carousel-button').style.display = 'inline-block';
             document.getElementById('pause-carousel-button').style.display = 'none';
         }
@@ -116,10 +162,7 @@ function startCarousel() {
     // Toca o áudio do primeiro slide
     const firstSlideData = GAME_WORDS[0];
     if (firstSlideData) {
-        const audio = new Audio(`audio/${firstSlideData.sound}`);
-        audio.play().catch(error => {
-            console.warn("Audio playback failed:", error);
-        });
+        speakWord(firstSlideData.word);
     }
     
     // Inicia o timer para a primeira transição
@@ -485,11 +528,8 @@ function showRewardBanner(wordData) {
     // Mostra o banner
     banner.classList.remove('hidden');
     
-    // Toca o áudio
-    const audio = new Audio(`audio/${wordData.sound}`);
-    audio.play().catch(error => {
-        console.warn("Audio playback failed:", error);
-    });
+    // Lê a palavra em voz alta
+    speakWord(wordData.word);
 }
 
 function hideRewardBanner() {

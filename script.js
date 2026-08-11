@@ -37,7 +37,8 @@ function speakWord(word) {
     // Cancela qualquer fala anterior para não encavalar
     window.speechSynthesis.cancel();
     
-    const utterance = new SpeechSynthesisUtterance(word);
+    // Converte para minúsculo para evitar que o navegador soletre como sigla (ex: S-W-I-M)
+    const utterance = new SpeechSynthesisUtterance(word.toLowerCase());
     
     if (availableVoices.length === 0) {
         loadVoices();

@@ -15,7 +15,7 @@ const GRID_SIZE = 7;
 let currentWordIndex = 0;
 let carouselTimer = null;
 let completedWords = new Set(); // Rastreia palavras já completadas
-
+let isCarouselPaused = false;
 
 // =================================================================
 // 2. FUNÇÕES DE NAVEGAÇÃO
@@ -56,10 +56,19 @@ function createCarousel() {
 
 function startCarousel() {
     const slides = document.querySelectorAll('.carousel-slide');
-    const timerElement = document.getElementById('carousel-timer');
     const totalSlides = slides.length;
     let currentSlide = 0;
     let time = 3;
+
+    // Reseta estado e interface
+    isCarouselPaused = false;
+    document.getElementById('pause-carousel-button').textContent = 'PAUSAR';
+    document.getElementById('pause-carousel-button').style.display = 'inline-block';
+    document.getElementById('restart-carousel-button').style.display = 'none';
+    document.getElementById('start-game-button').disabled = true;
+    document.getElementById('carousel-message').innerHTML = 'Preste atenção nos nomes e sons! Próximo slide em <span id="carousel-timer">3</span>s...';
+    
+    const timerElement = document.getElementById('carousel-timer');
 
     function nextSlide() {
         currentSlide = (currentSlide + 1);
@@ -79,13 +88,16 @@ function startCarousel() {
                 });
             }
         } else {
-            clearInterval(carouselTimer);
-            document.getElementById('carousel-message').textContent = "Memorização Completa! Clique em INICIAR JOGO.";
+            if (carouselTimer) clearInterval(carouselTimer);
+            document.getElementById('carousel-message').innerHTML = "Memorização Completa! Clique em INICIAR JOGO ou VER NOVAMENTE.";
             document.getElementById('start-game-button').disabled = false;
+            document.getElementById('restart-carousel-button').style.display = 'inline-block';
+            document.getElementById('pause-carousel-button').style.display = 'none';
         }
     }
 
     function updateTimer() {
+        if (isCarouselPaused) return;
         if (currentSlide < totalSlides) {
             time--;
             timerElement.textContent = time;
@@ -109,10 +121,8 @@ function startCarousel() {
         });
     }
     
-    // Reseta o estado do botão
-    document.getElementById('start-game-button').disabled = true;
-    
     // Inicia o timer para a primeira transição
+    if (carouselTimer) clearInterval(carouselTimer);
     carouselTimer = setInterval(updateTimer, 1000);
 }
 
@@ -495,6 +505,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('start-learning-button').addEventListener('click', () => {
         navigateTo('page-carousel');
         createCarousel();
+        startCarousel();
+    });
+
+    document.getElementById('pause-carousel-button').addEventListener('click', function() {
+        isCarouselPaused = !isCarouselPaused;
+        this.textContent = isCarouselPaused ? 'CONTINUAR' : 'PAUSAR';
+    });
+
+    document.getElementById('restart-carousel-button').addEventListener('click', () => {
         startCarousel();
     });
 

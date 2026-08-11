@@ -30,13 +30,15 @@
 
     <div id="page-carousel" class="app-page">
         <h2>Fase de Memorização: Atenção aos Nomes e Sons! 🎧</h2>
-        <div id="carousel-container">
+        <p id="carousel-message" style="font-weight: bold;">Preste atenção nos nomes e sons! Próximo slide em <span id="carousel-timer">3</span>s...</p>
+        <div class="carousel-wrapper" style="position: relative; width: 100%; max-width: 1200px; margin: 0 auto;">
+            <div id="carousel-container">
             </div>
-        <p id="carousel-message">Preste atenção nos nomes e sons! Próximo slide em <span id="carousel-timer">3</span>s...</p>
-        <div id="carousel-controls" style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
-            <button id="pause-carousel-button" class="btn-primary">PAUSAR</button>
-            <button id="restart-carousel-button" class="btn-primary" style="display: none;">VER NOVAMENTE</button>
-            <button id="start-game-button" class="btn-primary" disabled>INICIAR JOGO</button>
+            <div id="carousel-controls" style="position: absolute; right: 5%; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 1.5rem; z-index: 10;">
+                <button id="pause-carousel-button" class="btn-primary">PAUSAR</button>
+                <button id="restart-carousel-button" class="btn-primary" style="display: none; padding: 1.5rem; font-size: 1.2rem;">VER NOVAMENTE</button>
+                <button id="start-game-button" class="btn-primary" style="display: none; padding: 1.5rem; font-size: 1.2rem;">INICIAR JOGO</button>
+            </div>
         </div>
     </div>
 
